@@ -1,0 +1,78 @@
+<h2>Издавање рачуна</h2>
+Одаберите жељени објекат:
+<select   [(ngModel)]="izabraniObjekat" onChange={this.handleChange}>
+    <option *ngFor="let kasa of korisnik.kase" value="{{kasa.lokacija}}">{{kasa.lokacija}}</option>
+    <option *ngFor="let mag of korisnik.magacini" value="{{mag.naziv}}">{{mag.naziv}}</option>
+</select>
+<button (click)=izaberiObjekat()>изабери</button>
+
+<hr>
+<table>
+    <tr>
+        <td>шифра_артикла</td>
+        <td>назив_артикла</td>
+        <td>цена</td>
+        <td>стање</td>
+    </tr>  
+    <tr *ngFor = 'let stavka of sviArtikliUponudi;'>
+        <td>{{stavka.sifra}}</td>
+        <td>{{stavka.naziv}}</td>
+        <td>{{stavka.cena}}</td> 
+        <td>{{stavka.kolicina}}</td>
+        <td><input type="number" [(ngModel)]="kolicina" ></td>
+        <td><button (click)=izaberiStavku(stavka)>изабери</button></td>
+    </tr>
+</table>
+<hr>
+<table>
+    <tr>
+        <td>шифра_артикла</td>
+        <td>назив_артикла</td>
+        <td>цена</td>
+        <td>стање</td>
+    </tr>  
+    <tr *ngFor = 'let stavka of izabraneStavke;'>
+        <td>{{stavka.sifra}}</td>
+        <td>{{stavka.naziv}}</td>
+        <td>{{stavka.cena}}</td> 
+        <td>{{stavka.kolicina}}</td>
+    </tr>
+</table>   
+<hr>
+Начин плаћања:
+<mat-radio-group [(ngModel)]="nacinPlacanja">
+                <mat-radio-button value=0 [checked]='true'>готовина</mat-radio-button>
+                <mat-radio-button value=1>чекови</mat-radio-button>
+                <mat-radio-button value=2 >картица</mat-radio-button>
+                <mat-radio-button value=3 >вирмен</mat-radio-button>
+</mat-radio-group>    
+
+<br/>
+Готовина:
+<input *ngIf="nacinPlacanja==0" type="number" [(ngModel)]="gotovina" >
+<br>
+Побраћај:
+<span *ngIf="nacinPlacanja==0">{{povracaj}}</span>
+<br/>
+Име:
+<input *ngIf="nacinPlacanja==1"   type="text" [(ngModel)]="ime" >
+Презиме:
+<input *ngIf="nacinPlacanja==1"  type="text" [(ngModel)]="prezime">
+Број личне карте:
+<input *ngIf="nacinPlacanja==1"  type="text" [(ngModel)]="brLk" >
+<br/>
+Број личне карте:
+<input *ngIf="nacinPlacanja==2" type="text"  [(ngModel)]="brLk" >
+Слип:
+<span *ngIf="nacinPlacanja==2" >{{slip}}</span>
+<button mat-button  (click)="unesiPodatke()">Унеси податке</button>
+
+<select *ngIf="nacinPlacanja==3" [(ngModel)]="Narucilac">
+    <option *ngFor="let n of sviNarucioci" >{{n}}</option>
+</select>
+
+<button mat-button  (click)="potvrdiRacun()">Потврди</button>
+
+<hr>
+{{poruka}}
+{{confirm}}

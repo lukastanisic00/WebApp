@@ -1,0 +1,89 @@
+<h2>Издавање рачуна</h2>
+Одаберите жељени објекат:
+<select   [(ngModel)]="izabraniObjekat" onChange={this.handleChange}>
+    <option *ngFor="let kasa of korisnik.kase" value="{{kasa.lokacija}}">{{kasa.lokacija}}</option>
+    <option *ngFor="let mag of korisnik.magacini" value="{{mag.naziv}}">{{mag.naziv}}</option>
+</select>
+<button (click)=izaberiObjekat()>изабери</button>
+
+<hr>
+<div *ngFor="let o of odeljenja">
+    {{o.naziv}}
+<div *ngFor="let s of o.stolovi">
+    {{s.naziv}}
+    <br/>
+<table>
+    
+    <tr>
+        <td>шифра_артикла</td>
+        <td>назив_артикла</td>
+        <td>цена</td>
+        <td>стање</td>
+    </tr>  
+    <tr *ngFor = 'let stavka of sviArtikliUponudi;'>
+        <td>{{stavka.sifra}}</td>
+        <td>{{stavka.naziv}}</td>
+        <td>{{stavka.cena}}</td> 
+        <td>{{stavka.kolicina}}</td>
+        <td><input type="number" [(ngModel)]="racuni[indeks(o,s)].kolicina" ></td>
+        <td><button (click)=izaberiStavku(stavka,s,o)>изабери</button></td>
+    </tr>
+</table>
+<hr>
+<table>
+    <tr>
+        <td>шифра_артикла</td>
+        <td>назив_артикла</td>
+        <td>цена</td>
+        <td>стање</td>
+    </tr>  
+    <tr *ngFor = 'let stavka of racuni[indeks(o,s)].izabraneStavke;'>
+        <td>{{stavka.sifra}}</td>
+        <td>{{stavka.naziv}}</td>
+        <td>{{stavka.cena}}</td> 
+        <td>{{stavka.kolicina}}</td>
+    </tr>
+</table> 
+ 
+<hr>
+Начин плаћања:
+<mat-radio-group [(ngModel)]="racuni[indeks(o,s)].nacinPlacanja">
+                <mat-radio-button value=0 [checked]='true'>готовина</mat-radio-button>
+                <mat-radio-button value=1>чекови</mat-radio-button>
+                <mat-radio-button value=2 >картица</mat-radio-button>
+                <mat-radio-button value=3 >вирмен</mat-radio-button>
+</mat-radio-group>    
+
+<br/>
+Готовина:
+<input *ngIf="racuni[indeks(o,s)].nacinPlacanja==0" type="number" [(ngModel)]="racuni[indeks(o,s)].gotovina" >
+<br>
+Побраћај:
+<span *ngIf="racuni[indeks(o,s)].nacinPlacanja==0">{{racuni[indeks(o,s)].povracaj}}</span>
+<br/>
+Име:
+<input *ngIf="racuni[indeks(o,s)].nacinPlacanja==1"   type="text" [(ngModel)]="racuni[indeks(o,s)].ime" >
+Презиме:
+<input *ngIf="racuni[indeks(o,s)].nacinPlacanja==1"  type="text" [(ngModel)]="racuni[indeks(o,s)].prezime">
+Број личне карте:
+<input *ngIf="racuni[indeks(o,s)].nacinPlacanja==1"  type="text" [(ngModel)]="racuni[indeks(o,s)].brLk" >
+<br/>
+Број личне карте:
+<input *ngIf="racuni[indeks(o,s)].nacinPlacanja==2" type="text"  [(ngModel)]="racuni[indeks(o,s)].brLk" >
+Слип:
+<span *ngIf="racuni[indeks(o,s)].nacinPlacanja==2" >{{racuni[indeks(o,s)].slip}}</span>
+<button mat-button  (click)="unesiPodatke(s,o)">Унеси податке</button>
+
+<select *ngIf="racuni[indeks(o,s)].nacinPlacanja==3" [(ngModel)]="racuni[indeks(o,s)].Narucilac">
+    <option *ngFor="let n of sviNarucioci" >{{n}}</option>
+</select>
+
+<button mat-button  (click)="potvrdiRacun(s,o)">Потврди</button>
+
+{{racuni[indeks(o,s)].poruka}}
+{{racuni[indeks(o,s)].confirm}}
+<br>
+</div>
+<hr>
+</div>
+<hr>

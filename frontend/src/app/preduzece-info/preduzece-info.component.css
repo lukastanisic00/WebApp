@@ -1,0 +1,20 @@
+.greska{
+    color: red;
+}
+
+.tab{
+    background-color: aquamarine;
+    position:sticky;
+    width: 150%;
+    height: 80%;
+    
+    
+
+  
+}
+.pic{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+

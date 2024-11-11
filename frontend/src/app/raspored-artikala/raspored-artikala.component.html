@@ -1,0 +1,36 @@
+<h3>Распоред артикала:</h3>
+<button mat-button (click)="sacuvaj()">Сачувај категоризацију</button>
+<hr>
+<table  *ngFor="let kat of kategorije">
+  <tr>
+    <td><h4>{{kat.naziv}}</h4></td>
+    <td><button mat-button (click)="openDialogK(kat)">Додели артикал</button></td>
+  </tr>
+  <div *ngFor="let pot of kat.potkategorije">
+  <tr>
+    <td><h5>{{pot.naziv}}</h5></td>
+    <td><button mat-button (click)="openDialogP(pot,kat)">Додели артикал</button></td>
+  </tr>
+  <tr *ngFor="let artikal of pot.artikli">
+    <td>--{{artikal.naziv_artikla}}</td>
+    <td>({{artikal.sifra_artikla}})</td>
+  </tr>
+  </div>
+  <tr>
+    <td><input type="text" [(ngModel)]="nazivP">
+      <button mat-button (click)="dodajPotkategoriju(kat)">Додај поткатегорију</button></td>
+  </tr>
+  <tr *ngFor="let artikal of kat.artikli">
+    <td>-{{artikal.naziv_artikla}}</td>
+    <td>({{artikal.sifra_artikla}})</td>
+  </tr>
+<hr>
+</table>
+<hr>
+<input type="text" [(ngModel)]="nazivK">
+<button mat-button (click)="dodajKategoriju()">Додај категорију</button>
+<br>
+<span >{{poruka}}</span>
+
+<hr>
+ <a routerLink="..">Повратак на мени</a>

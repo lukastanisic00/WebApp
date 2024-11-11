@@ -1,0 +1,45 @@
+<b>Prijava na sistem</b>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Korisnicko ime:</td>
+            <td>
+                <input type='text' name='kor_ime' [(ngModel)]='kor_ime' required="true">
+            </td>
+        </tr>
+        <tr>
+            <td>Lozinka:</td>
+            <td>
+                <input type='password' name='lozinka' [(ngModel)]='lozinka'>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Prijava'  (click)='prijavaNaSistem()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='greska'>{{poruka}}</span>
+<br/>
+Želite da registrujete preduzeće? <a routerLink="/registracija">Kliknite ovde.</a>
+<br/>
+<br/>
+<b>Racuni</b>
+<table>
+    <tr>
+        <td>Preduzece</td>
+        <td>Iznos</td>
+        <td>Porez</td>
+        <td>Datum</td>
+        <td>Stavke</td>
+    </tr>
+    <tr *ngFor = 'let racun of racuni;'>
+        <td>{{racun.preduzece}}</td>
+        <td>{{racun.iznos}}</td>
+        <td>{{racun.pdv}}</td>
+        <td>{{racun.datum}}</td>
+        <td *ngFor = 'let stavka of racun.stavke;'>{{stavka.naziv}} : {{stavka.kolicina}} </td>
+    </tr>
+</table>

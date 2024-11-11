@@ -1,0 +1,116 @@
+<h2>Администратор</h2>
+<hr/>
+<h4>Захтеви</h4>
+<table>
+    <tr>
+        <td>Назив предузећа</td>
+        <td>Корисничко име</td>
+        <td>Име одговорног лица</td>
+        <td>Презиме одговорног лица</td>
+        <td>Контакт</td>
+        <td>е-пошта</td>
+        <td>адреса седишта</td>
+        <td>ПИБ</td>
+        <td>Матични број</td>
+        <td>грб</td>
+    </tr>
+    <hr>
+    <tr *ngFor = 'let zahtev of zahtevi;'>
+        <td>{{zahtev.naziv}}</td>
+        <td>{{zahtev.kor_ime}}</td>
+        <td>{{zahtev.ime}}</td>
+        <td>{{zahtev.prezime}}</td>
+        <td>{{zahtev.tel}}</td>
+        <td>{{zahtev.mejl}}</td>
+        <td>{{zahtev.sediste}}</td>
+        <td>{{zahtev.pib}}</td>
+        <td>{{zahtev.matBroj}}</td>
+        <td><img class="slika" src="{{zahtev.grb}}"></td>
+
+        <td>
+            <input type='button' value='активирај' (click)='aktiviraj(zahtev)'>
+        </td>
+    </tr>
+</table>
+<hr>
+{{poruka1}}
+<h4>Остала предузећа</h4>
+<table>
+    <tr>
+        <td>Назив предузећа</td>
+        <td>Корисничко име</td>
+        <td>Име одговорног лица</td>
+        <td>Презиме одговорног лица</td>
+        <td>Контакт</td>
+        <td>е-пошта</td>
+        <td>адреса седишта</td>
+        <td>ПИБ</td>
+        <td>Матични број</td>
+        <td>грб</td>
+    </tr>
+    <hr>
+    <tr *ngFor = 'let zahtev of ostalaPreduzeca;'>
+        <td>{{zahtev.naziv}}</td>
+        <td>{{zahtev.kor_ime}}</td>
+        <td>{{zahtev.ime}}</td>
+        <td>{{zahtev.prezime}}</td>
+        <td>{{zahtev.tel}}</td>
+        <td>{{zahtev.mejl}}</td>
+        <td>{{zahtev.sediste}}</td>
+        <td>{{zahtev.pib}}</td>
+        <td>{{zahtev.matBroj}}</td>
+        
+        <td>
+        <img class="slika" src="{{zahtev.grb}}"></td>
+
+        <td *ngIf="zahtev.status=='neaktivan'">
+            <input  type='button' value='активирај' (click)='aktiviraj(zahtev)'>
+        </td>
+        <td *ngIf="zahtev.status=='aktivan'">
+            <input type='button' value='деактивирај' (click)='deaktiviraj(zahtev)'>
+        </td>
+        <td *ngIf="zahtev.status=='aktivan' && zahtev.postavljen== true">
+            <input type='button' value='извештај' (click)='izvestaj(zahtev.pib)'>
+        </td>
+    </tr>
+</table>
+<hr>
+{{poruka1}}
+<div >
+Почетни датум:<input type="date" [(ngModel)]="datumPocetni">
+<br/>
+
+Крајњи датум:<input type="date" [(ngModel)]="datumKrajnji">
+
+
+<button *ngIf="prikaz" (click)="sakrij()">сакриј</button>
+</div>
+<hr>
+<div *ngIf="prikaz">
+    <table>
+        <tr>
+            <td>назив</td>
+            <td>износ</td>
+            <td>порез</td>
+            <td>датум</td>          
+        </tr>
+        <tr *ngFor="let i of izvestajiZaPrikaz">
+            <td>{{i.naziv}}</td>
+            <td>{{i.iznos}}</td>
+            <td>{{i.porez}}</td>
+            <td>{{i.datum}}</td> 
+        </tr>
+    </table>
+
+
+    
+</div>
+
+
+{{poruka1}}
+
+<hr>
+ <a routerLink="registrujPreduzece">Регистрација предузећа.</a>
+ <br/>
+ 
+ <a routerLink="registrujKupca">Регистрација купаца.</a>

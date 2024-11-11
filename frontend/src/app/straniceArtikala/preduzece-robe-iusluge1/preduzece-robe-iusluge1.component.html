@@ -1,0 +1,181 @@
+<h2>Артикли</h2>
+{{porukaS}}
+{{porukaSp}}
+{{porukaJ}}
+{{porukaN}}
+{{porukaT}}
+
+
+<span>Укупно {{brojArtikala}} артикала, страна {{currentPage}}</span>
+<table>
+    <tr>
+        <td>шифра_артикла</td>
+        <td>назив_артикла</td>
+        <td>јединица_мере</td>
+        <td>стопа_пореза</td>
+        <td>произвођач</td>
+    </tr>  
+    <tr *ngFor = 'let proizvod of artikliZaPrikaz;'>
+        <td>{{proizvod.sifra_artikla}}</td>
+        <td>{{proizvod.naziv_artikla}}</td>
+        <td>{{proizvod.jedinica_mere}}</td>
+        <td>{{proizvod.stopa_poreza}}</td>
+        <td>{{proizvod.proizvodjac}}</td>
+        <td><button *ngIf="forma==false" (click)=izaberi(proizvod)>измени</button></td>
+        <td><button *ngIf="forma==false" (click)= ukloni(proizvod)>уклони</button></td>
+    </tr>
+</table>
+<button *ngIf="forma==false" (click)="unos()">унос</button>
+<button *ngIf="forma" (click)="odustani()">одустани</button>
+<br/>
+<button *ngIf="forma==false" (click)="prethodnaStranica()"> < </button>
+<button *ngIf="forma==false" (click)="sledecaStranica()"> > </button>
+
+<hr/>
+<h4>Форма за унос</h4>
+<form *ngIf="forma"  [formGroup]='regForm' (ngSubmit)="unesi()">
+<table>
+    <tr><h5>Општи подаци</h5></tr>
+    <tr>
+        <td>Шифра артикла:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='sifra_artikla'>        
+        </td>
+    </tr>
+    <tr>
+        <td>Назив артикла:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='naziv_artikla'> 
+            
+        </td>
+    </tr>
+    <tr>
+        <td>Jединица мере:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='jedinica_mere' >
+        </td>
+    </tr>
+    <tr>
+        <td>Пореска стопа:</td>
+        <td>
+            <mat-radio-group class="form-control" formControlName='stopa_poreza'  >
+                <mat-radio-button *ngIf="korisnik.uSistemu" value="20">општа</mat-radio-button>
+                <mat-radio-button *ngIf="korisnik.uSistemu" value="10">посебна</mat-radio-button>
+                <mat-radio-button *ngIf="korisnik.uSistemu==false"  aria-disabled="true" value="0">није у систему</mat-radio-button>
+              </mat-radio-group>
+        </td>
+    </tr>
+    <tr>
+        <td>Тип робе:</td>
+        <td>
+            <mat-radio-group *ngIf="korisnik.tip=='P'" class="form-control" formControlName='tip'  >
+                <mat-radio-button value="hrana">храна</mat-radio-button>
+                <mat-radio-button value="pice">пиће</mat-radio-button>
+                <mat-radio-button value="sirovina">сировина</mat-radio-button>
+              </mat-radio-group>
+        </td>
+    </tr>
+    <tr><h5>Допунски подаци</h5></tr>
+    <tr>
+        <td>Земља порекла:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='zemlja_porekla' >
+        </td>
+    </tr>
+    <tr>
+        <td>Страни назив:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='strani_naziv_artikla' >
+        </td>
+    </tr>
+    <tr>
+        <td>Назив произвођача:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='proizvodjac' >
+        </td>
+    </tr>
+    <tr>
+        <td>Царинска тарифа:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='carinska_tarifa' >
+        </td>
+    </tr>
+    <tr>
+        <td>Еко такса:</td>
+        <td>
+            <input type="checkbox" class="form-control" formControlName='eko_taksa' >
+        </td>
+    </tr>
+    <tr>
+        <td>Акцизе:</td>
+        <td>
+            <input type="checkbox" class="form-control" formControlName='akcize' >
+        </td>
+    </tr>
+    <tr>
+        <td>Минималне жељене залихе:</td>
+        <td>
+            <input type="number" class="form-control" formControlName='min_zeljene_zalihe'>
+        </td>
+    </tr>
+    <tr>
+        <td>Максималне жељене залихе:</td>
+        <td>
+            <input type="number" class="form-control" formControlName='maks_zeljene_zalihe'>
+        </td>
+    </tr>
+    <tr>
+        <td>Опис:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='opis' >
+        </td>
+    </tr>
+    <tr>
+        <td>Декларација:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='deklaracija' >
+        </td>
+    </tr>
+    </table>
+    <h5>Цене и стање робе</h5>
+    <table formArrayName="magacini">
+    <tr>
+        <td> назив_магацина_објекта </td>
+        <td> набавна_цена_РСД </td>
+        <td> продајна_цена_РСД </td>
+        <td> текуће_стање_лагера </td>
+        <td> мин_жељена_количина </td>
+        <td> макс_жељена_количина </td>
+    </tr>
+        <tr *ngFor="let magacin of magacini().controls; let i=index" [formGroupName]="i">  
+            <td>   
+                <input type="text" formControlName="naziv_magacina_objekta" class="form-control">  
+            </td>
+            <td>
+                <input type="number" formControlName="nabavna_cena_RSD" class="form-control">  
+            </td>     
+            <td>
+                <input type="number" formControlName="prodajna_cena_RSD" class="form-control">  
+            </td>   
+            <td>
+                <input type="number" formControlName="tekuce_stanje_lagera" class="form-control">  
+            </td>   
+            <td>
+                <input type="number" formControlName="min_zeljene_zalihe" class="form-control">  
+            </td> 
+            <td>
+                <input type="number" formControlName="maks_zeljene_zalihe" class="form-control">  
+            </td> 
+        </tr> 
+            
+</table>
+ 
+<br>
+<button  type="submit" >Потврди</button>
+</form>
+<span color="red" class='greska'>{{poruka}}</span>
+<br/>
+
+
+
+{{poruka}}

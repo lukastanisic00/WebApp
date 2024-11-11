@@ -1,0 +1,37 @@
+<mat-tab-group>
+    <div *ngFor="let objekat of objekti">
+        <mat-tab label="{{objekat.naziv}}">
+            <mat-tab-group>
+                <div class="example-boundary" *ngFor="let o of objekat.odeljenja">
+                    <mat-tab label="{{o.naziv}}">
+                        <button mat-button (click)="dodajSto(o,objekat)">Додај сто</button>
+                        <div class="example-boundary">
+                            <hr>
+
+
+
+
+                            
+                            <hr>
+                            <div *ngFor="let sto of o.stolovi;"><div *ngIf="sto.oblik=='O'" class="okrugli_sto"
+                                cdkDragBoundary=".example-boundary" id="a" width="100" height="100" (cdkDragEnded)="dragEnd($event,sto,o)"
+                                [cdkDragFreeDragPosition]="sto.pozicija" [ngStyle]="{'height.px':sto.a ,'width.px':sto.a}"
+                                [cdkDragData]="{sto}" cdkDrag>{{sto.naziv}}({{sto.status}})</div>
+                            <div *ngIf="sto.oblik=='P'" class="pravougaoni_sto"
+                            cdkDragBoundary=".example-boundary" id="a" (cdkDragEnded)="dragEnd($event,sto,o)" 
+                            [cdkDragData]="{sto}" [ngStyle]="{'height.px':sto.a ,'width.px':sto.b}"
+                            cdkDrag>{{sto.naziv}}({{sto.status}})</div>
+                                </div>
+                        </div>
+                        <button mat-button (click)="sacuvaj(o)">Сачувај</button>
+                        <span class="poruka">{{message}}</span>
+                    </mat-tab>
+                </div>
+                <mat-tab label="Додај одељење">
+                <input type="text" [(ngModel)]="nazivO">
+                <button mat-button (click)="dodajOdeljenje(objekat)">Додај одељење</button>
+            </mat-tab>
+            </mat-tab-group>
+        </mat-tab>
+    </div>
+</mat-tab-group>

@@ -1,0 +1,30 @@
+<h3>Промена лозинке:</h3>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Стара лозинка:</td>
+            <td>
+                <input type='password' name='staraLozinka' [(ngModel)]='staraLozinka'>
+            </td>
+        </tr>
+        <tr>
+            <td>Нова лозинка:</td>
+            <td>
+                <input type='password' name='lozinka' [(ngModel)]='novaLozinka'>
+            </td>
+        </tr>
+        <tr>
+            <td>Нова лозинка:</td>
+            <td>
+                <input type='password' name='lozinka2' [(ngModel)]='ponovnaLozinka'>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Потврди' (click)='promeniLozinku()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='greska'>{{poruka}}</span>

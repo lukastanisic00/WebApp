@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Детаљи рачуна</h1>
+<div mat-dialog-content>
+<hr>
+
+Име и презиме лица:{{racun.ime}} {{racun.prezime}}
+<br/>
+Број личне карте:{{racun.brLk}}
+<hr>
+
+Износ:{{racun.iznos}}
+<br/>
+ПДВ:{{racun.pdv}} 
+<br/>
+Начин плаћања:{{racun.nacinPlacanja}}
+<hr>
+
+
+Објекат:{{racun.nazivObjekta}}
+<br/>
+Предузеће:{{racun.nazivPreduzeca}}
+<hr>
+Наручилац:{{racun.narucilac}}
+<hr>
+Ставке:
+<table>
+    <tr>
+        <td>назив</td>
+        <td>шифра</td>
+        <td>количина</td>
+        <td>цена</td>
+    </tr>
+    <tr *ngFor="let s of racun.stavke;">
+        <td>{{s.naziv}}</td>
+        <td>{{s.sifra}} </td>
+        <td>{{s.kolicina}}</td>
+        <td>{{s.cena}}</td>
+    </tr>   
+    <hr>  
+</table>    
+<button mat-button (click)="zatvori()">Затвори</button>
+</div>

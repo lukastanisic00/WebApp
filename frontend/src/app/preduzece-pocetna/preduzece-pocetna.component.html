@@ -1,0 +1,37 @@
+
+
+
+
+<div class="container mt-3">
+  <h2>Садржај</h2>
+  <p></p>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link"  href="preduzece/info">Подаци о предузећу</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="preduzece/narucioci">Наручиоци</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="preduzece/robe_i_usluge0">Робе и услуге</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="preduzece/rasporedArtikala">Распоред артикала</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="preduzece/rasporedStolova">Распоред столова</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="IzdavanjeRacuna()" >Издавање рачуна</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="preduzece/izvestaj">Издавање рачуна</a>
+    </li>
+  </ul>
+</div>
+
+<button (click)="IzlogujSe()">Излогујте се</button>
+
+
+
+<router-outlet> </router-outlet>

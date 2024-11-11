@@ -1,0 +1,19 @@
+<h3>РЕГИСТРАЦИЈА</h3>
+<form [formGroup]='extraForm'  >
+
+
+<table class="table table-bordered" formArrayName="ziroRacuni">  
+        <tr>  
+          <th colspan="2">Add Multiple Quantity:</th>  
+          <th width="150px"><button type="button" (click)="dodajPolje()" class="btn btn-primary">+</button></th>  
+        </tr>  
+        <tr *ngFor="let racun of ziroRacuni().controls; let i=index" [formGroupName]="i" [formGroup]="extraForm">  
+          <td>  
+              Quantity :  
+              <input type="text" formControlName="ziroRacun" class="form-control">  
+          </td>   
+        </tr>  
+      </table>  
+        
+</form>
+<span class='greska'>{{message}}</span>

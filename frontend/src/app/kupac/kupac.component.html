@@ -1,0 +1,36 @@
+
+<select   [(ngModel)]="izabranoPreduzece" onChange={this.handleChange}>
+    <option>-</option>
+    <option *ngFor="let p of preduzeca" value="{{p.pib}}">{{p.naziv}}</option>
+</select>
+<button (click)="dohvatiArtikle()">Претражи</button>
+  
+<hr>
+<h4>Артикли</h4>
+<table>
+    <tr>
+        <td>Назив артикла</td>
+        <td>Шифра</td>
+        <td>Произвођач</td>
+        <td>Најнижа цена</td>
+        <td>Доступно у</td>
+    </tr>
+    <tr *ngFor = 'let a of prikaz;'>
+        <td>{{a.naziv}}</td>
+        <td>{{a.sifra}}</td>
+        <td>{{a.proizvodjac}}</td>
+        <td>{{a.minCena}}</td>
+        <td>{{a.objekti}}</td>
+        
+    </tr>
+</table>
+<hr>
+
+
+<input type="text" [(ngModel)]="searchParam">
+<button (click)="pretraziArtikle()">Претражи</button>
+<button (click)="ponistiPretragu()">Поништи претрагу</button>
+{{greska2}}
+
+
+

@@ -1,0 +1,332 @@
+<mat-tab-group class="tab">
+    <mat-tab label="Општи подаци" class="tab"> 
+        <button (click)=" izmena()">Уреди</button>
+        <form  [formGroup]='regForm' (ngSubmit)="Izmeni()" >
+            <table>
+                <tr>
+                    <td>Име одговорног лица:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.ime}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='ime'  [ngModel]="korisnik.ime"
+                        [class.is-invalid]='regForm.get("ime").errors'
+                        [class.is-valid]='regForm.get("ime") && regForm.get("ime").touched'>        
+                    </td>
+                </tr>
+                <tr>
+                    <td>Презиме одговорног лица:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.prezime}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='prezime'  [ngModel]="korisnik.prezime"
+                        [class.is-invalid]='regForm.get("prezime").errors'
+                        [class.is-valid]='regForm.get("prezime") && regForm.get("prezime").touched' >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Корисничко име:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.kor_ime}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='kor_ime'  [ngModel]="korisnik.kor_ime"
+                        [class.is-invalid]='regForm.get("kor_ime").errors'
+                        [class.is-valid]='regForm.get("kor_ime") && regForm.get("kor_ime").touched'  >
+                    </td>
+                </tr>
+                <div *ngIf="izmeni">
+                <tr>
+                    
+                    <td>Лозинка:</td>
+                    <td>
+                        <input *ngIf="izmeni" type="password" class="form-control" formControlName='lozinka'  
+                        [class.is-invalid]='regForm.get("lozinka").errors'
+                        [class.is-valid]='regForm.get("lozinka") && regForm.get("lozinka").touched'   >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Потврда лозинке:</td>
+                    <td>
+                        <input *ngIf="izmeni" type="password" class="form-control" formControlName='lozinkaP'  
+                        [class.is-invalid]='regForm.get("lozinkaP").errors'
+                        [class.is-valid]='regForm.get("lozinkaP") && regForm.get("lozinkaP").touched'> >
+                    </td>
+                </tr>
+            </div>
+                <tr>
+                    <td>Контакт телефон:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.tel}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='broj'  
+                        [class.is-invalid]='regForm.get("broj").errors'
+                        [class.is-valid]='regForm.get("broj") && regForm.get("broj").touched'>  >
+                    </td>
+                </tr>
+                <tr>
+                    <td>имејл адреса:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.mejl}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='mejl'  
+                        [class.is-invalid]='regForm.get("mejl").errors'
+                        [class.is-valid]='regForm.get("mejl") && regForm.get("mejl").touched'>  >
+                    </td>
+                </tr>
+                <tr>
+                    <td>назив предузећа:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.naziv}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='naziv'  
+                        [class.is-invalid]='regForm.get("naziv").errors'
+                        [class.is-valid]='regForm.get("naziv") && regForm.get("naziv").touched'>  >
+                    </td>
+                </tr>
+                <tr>
+                    <td>тип предузећа:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.tip}}</span>
+                        <mat-radio-group *ngIf="izmeni" class="form-control" formControlName='tip'  
+                        [class.is-invalid]='regForm.get("tip").errors'
+                        [class.is-valid]='regForm.get("tip") && regForm.get("tip").touched'>>
+                            <mat-radio-button value="P">малопродајни објекат</mat-radio-button>
+                            <mat-radio-button value="U">услужни објекат</mat-radio-button>
+                          </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>адреса седишта:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.sediste}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='adresa'  
+                        [class.is-invalid]='regForm.get("adresa").errors'
+                        [class.is-valid]='regForm.get("adresa") && regForm.get("adresa").touched'>  >
+                    </td>
+                </tr>
+                <tr>
+                    <td>порески идентификациони број(ПИБ):</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.pib}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='pib'  
+                        [class.is-invalid]='regForm.get("pib").errors'
+                        [class.is-valid]='regForm.get("pib") && regForm.get("pib").touched'> >
+                    </td>
+                </tr>
+                <tr>
+                    <td>матични број:</td>
+                    <td>
+                        <span *ngIf="izmeni ==false">{{korisnik.matBroj}}</span>
+                        <input *ngIf="izmeni" type="text" class="form-control" formControlName='matBroj'  
+                        [class.is-invalid]='regForm.get("matBroj").errors'
+                        [class.is-valid]='regForm.get("matBroj") && regForm.get("matBroj").touched'>    
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-label" for="customFile"> Грб предузећа:</label>    
+                    </td>
+                    
+                    <td> <input *ngIf="izmeni" type="file" accept=".jpg,.jpeg,.png" class="form-control" id="image"   class="form-control" formControlName='grb'  
+                        [class.is-invalid]='regForm.get("grb").errors'
+                        [class.is-valid]='regForm.get("grb") && regForm.get("grb").touched'>></td>
+                </tr>
+                
+                <tr>
+                    
+                    <td colspan="2">
+                        <button *ngIf="izmeni" type="submit" >Потврди измене</button>
+                    </td>
+                </tr>
+            </table>
+            </form>
+            <img class="pic" *ngIf="izmeni==false" src={{korisnik.grb}}> 
+            <br/>
+            <br/>
+            <div *ngIf="izmeni">
+            <span class='greska'>{{message}}</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('kor_ime').hasError('required')">Унесите корисничко име.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('ime').hasError('required')" >Унесите име.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('prezime').hasError('required')" >Унесите презиме.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('lozinka').hasError('required')">Унесите лозинку.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('lozinkaP').hasError('required')">Унесите потврду лозинке.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('broj').hasError('required')">Унесите број телефона.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('adresa').hasError('required')" >Унесите адресу.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('mejl').hasError('required')" >Унесите имејл адресу.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('matBroj').hasError('required')">Унесите матични број предузећа.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('pib').hasError('required')">Унесите ПИБ.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('grb').hasError('required')">Приложите грб предузећа.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('lozinka').hasError('pattern')" >Унесите лозинку у одговарајућем формату.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('broj').hasError('pattern')">Унесите број телефона у одговарајућем формату.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('pib').hasError('pattern')">Унесите ПИБ у одговарајућем формату.</span>
+            <br/>
+            <span class="form-control" *ngIf="regForm.get('mejl').hasError('email')">Унесите валидну имејл адресу.</span>
+        </div>
+        <br/>
+            
+                    
+  
+            
+    </mat-tab>
+    <mat-tab label="Жиро рачуни" class="tab">
+        <button (click)=" izmena2()">Уреди</button>
+        <form [formGroup]="productForm1" (ngSubmit)="onSubmit()">
+    
+            <p>
+                тип предузећа:
+                <span *ngIf="izmeni2==false">{{korisnik.tip}}</span>
+                <br />
+                <mat-radio-group *ngIf="izmeni2"  class="form-control" formControlName='tip'
+                    [class.is-invalid]='productForm1.get("tip").errors'
+                    [class.is-valid]='productForm1.get("tip") && productForm1.get("tip").touched'>
+                    <mat-radio-button  value="P" [checked]='true'>малопродајни објекат</mat-radio-button>
+                    <mat-radio-button  value="U">услужни објекат</mat-radio-button>
+                </mat-radio-group>
+    
+            </p>
+    
+            <table class="table table-bordered" formArrayName="delatnosti">
+                <tr>
+                    <td>делатности предузећа</td>
+                </tr>
+                <tr *ngFor="let delatnost of delatnosti().controls; let i=index" [formGroupName]="i">
+                    <td *ngIf="izmeni2==false">{{delatnost}}</td>
+                    <td *ngIf="izmeni2">
+                        <select formControlName="delatnost" class="form-control">
+                            <option *ngFor="let delatnosti of sifarnik">{{delatnosti.naziv}}</option>
+                        </select>
+                    </td>
+                    <td *ngIf="izmeni2">
+                        <button (click)="ukloniDelatnost(i)" class="btn btn-danger">Уклони</button>
+                    </td>
+                </tr>
+                <tr *ngIf="izmeni2">
+                    <button type="button" (click)="dodajDelatnost()" class="btn btn-primary">+</button>
+                </tr>
+            </table>
+    
+            <br />
+    
+            Предузеће је у систему ПДВ-а:
+            <span *ngIf="izmeni2==false">{{korisnik.uSistemu? 'да':'не'}}</span>
+            <br />
+            <input *ngIf="izmeni2" type="checkbox" class="form-control" formControlName='uSistemu' placeholder="false">
+            <br />
+    
+            <table class="table table-bordered" formArrayName="ziroRacuni">
+                <tr>
+                    <td>жиро рачун(и) предузећа</td>
+                </tr>
+                <tr *ngFor="let racun of ziroRacuni().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        <input  type="text" [readonly]="!izmeni2" formControlName="ziroRacun" class="form-control">
+                    </td>
+                    <td *ngIf="izmeni2">
+                        <button (click)="ukloniRacun(i)" class="btn btn-danger">Уклони</button>
+                    </td>
+                </tr>
+                <tr *ngIf="izmeni2">
+                    <button type="button" (click)="dodajRacun()" class="btn btn-primary">+</button>
+                </tr>
+            </table>
+    
+            <button *ngIf="izmeni2" type="submit" class="btn btn-success">Потврди</button>
+        </form>
+    
+        <br />
+       
+        
+        <br />
+    
+        <br />
+        <span class='greska'>{{message}}</span>
+        <br />
+        {{greskaD}}
+        <br />
+        {{greskaZR}}
+        <br />
+        {{greskaM}}
+        <br />
+        {{greskaK}}
+        <br />
+  
+    </mat-tab>
+
+    <mat-tab label="Магацини и касе" class="tab">
+        <button (click)=" izmena3()">Уреди</button>
+        <form [formGroup]="productForm2" (ngSubmit)="onSubmit()">
+            магацини:
+            <input [readonly]="!izmeni3" type="number" formControlName="brojMagacina" class="form-control">
+            <button *ngIf="izmeni3" type="button" (click)="postaviMagacine(brojMagacina())" class="btn btn-primary">Потврди</button>
+    
+    
+            <table class="table table-bordered" formArrayName="magacini">
+                <tr *ngFor="let magacin of magacini().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        назив:<input type="text" [readonly]="!izmeni3" formControlName="naziv" class="form-control">
+                    </td>
+                    <td>
+                        ид:<input type="number" [readonly]="!izmeni3" formControlName="id" class="form-control">
+                    </td>
+                </tr>
+            </table>
+    
+    
+    
+    
+    
+    
+            касe:
+    
+    
+            <input type="number" [readonly]="!izmeni3" formControlName="brojKasa" class="form-control">
+            <button *ngIf="izmeni3" type="button" (click)="postaviKase(brojKasa())" class="btn btn-primary">Потврди</button>
+    
+    
+            <table class="table table-bordered" formArrayName="kase">
+                <tr *ngFor="let kasa of kase().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        локација:<input type="text" [readonly]="!izmeni3" formControlName="lokacija" class="form-control">
+                    </td>
+                    <td>
+                        тип:<input type="number" [readonly]="!izmeni3" formControlName="tip" class="form-control">
+                    </td>
+                </tr>
+            </table>
+    
+            <button *ngIf="izmeni3" type="submit" class="btn btn-success">Потврди</button>
+        </form>
+
+       
+        <br/>  
+        
+        <br/> 
+        
+      <br/>  
+      <span class='greska'>{{message}}</span>
+      <br/>
+      {{greskaD}}
+      <br/>
+      {{greskaZR}}
+      <br/>
+      {{greskaM}}
+      <br/>
+      {{greskaK}}
+      <br/>
+    
+    </mat-tab>
+  </mat-tab-group>
+  <hr>
+ <a routerLink="..">Повратак на мени</a>
+  
+        
+            
+        
+  

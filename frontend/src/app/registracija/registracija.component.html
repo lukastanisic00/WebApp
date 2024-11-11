@@ -1,0 +1,153 @@
+<h3>РЕГИСТРАЦИЈА</h3>
+<form  [formGroup]='regForm' (ngSubmit)="register()">
+<table>
+    <tr>
+        <td>Име одговорног лица:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='ime'  [ngModel]="korisnik.ime"
+            [class.is-invalid]='regForm.get("ime").errors'
+            [class.is-valid]='regForm.get("ime") && regForm.get("ime").touched'>        
+        </td>
+    </tr>
+    <tr>
+        <td>Презиме одговорног лица:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='prezime'  [ngModel]="korisnik.prezime"
+            [class.is-invalid]='regForm.get("prezime").errors'
+            [class.is-valid]='regForm.get("prezime") && regForm.get("prezime").touched' >
+        </td>
+    </tr>
+    <tr>
+        <td>Корисничко име:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='kor_ime'  [ngModel]="korisnik.kor_ime"
+            [class.is-invalid]='regForm.get("kor_ime").errors'
+            [class.is-valid]='regForm.get("kor_ime") && regForm.get("kor_ime").touched'  >
+        </td>
+    </tr>
+    <tr>
+        <td>Лозинка:</td>
+        <td>
+            <input type="password" class="form-control" formControlName='lozinka'  
+            [class.is-invalid]='regForm.get("lozinka").errors'
+            [class.is-valid]='regForm.get("lozinka") && regForm.get("lozinka").touched'   >
+        </td>
+    </tr>
+    <tr>
+        <td>Потврда лозинке:</td>
+        <td>
+            <input type="password" class="form-control" formControlName='lozinkaP'  
+            [class.is-invalid]='regForm.get("lozinkaP").errors'
+            [class.is-valid]='regForm.get("lozinkaP") && regForm.get("lozinkaP").touched'> >
+        </td>
+    </tr>
+    <tr>
+        <td>Контакт телефон:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='broj'  
+            [class.is-invalid]='regForm.get("broj").errors'
+            [class.is-valid]='regForm.get("broj") && regForm.get("broj").touched'>  >
+        </td>
+    </tr>
+    <tr>
+        <td>имејл адреса:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='mejl'  
+            [class.is-invalid]='regForm.get("mejl").errors'
+            [class.is-valid]='regForm.get("mejl") && regForm.get("mejl").touched'>  >
+        </td>
+    </tr>
+    <tr>
+        <td>назив предузећа:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='naziv'  
+            [class.is-invalid]='regForm.get("naziv").errors'
+            [class.is-valid]='regForm.get("naziv") && regForm.get("naziv").touched'>  >
+        </td>
+    </tr>
+    <tr>
+        <td>тип предузећа:</td>
+        <td>
+            <mat-radio-group class="form-control" formControlName='tip'  
+            [class.is-invalid]='regForm.get("tip").errors'
+            [class.is-valid]='regForm.get("tip") && regForm.get("tip").touched'>>
+                <mat-radio-button value="P">малопродајни објекат</mat-radio-button>
+                <mat-radio-button value="U">услужни објекат</mat-radio-button>
+              </mat-radio-group>
+        </td>
+    </tr>
+    <tr>
+        <td>адреса седишта:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='adresa'  
+            [class.is-invalid]='regForm.get("adresa").errors'
+            [class.is-valid]='regForm.get("adresa") && regForm.get("adresa").touched'>  >
+        </td>
+    </tr>
+    <tr>
+        <td>порески идентификациони број(ПИБ):</td>
+        <td>
+            <input type="text" class="form-control" formControlName='pib'  
+            [class.is-invalid]='regForm.get("pib").errors'
+            [class.is-valid]='regForm.get("pib") && regForm.get("pib").touched'> >
+        </td>
+    </tr>
+    <tr>
+        <td>матични број:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='matBroj'  
+            [class.is-invalid]='regForm.get("matBroj").errors'
+            [class.is-valid]='regForm.get("matBroj") && regForm.get("matBroj").touched'>    >
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label class="form-label" for="customFile"> Грб предузећа:</label>    
+        </td>
+        <td> <input type="file" accept=".jpg,.jpeg,.png" class="form-control" id="file"   class="form-control" formControlName='grb'  
+            [class.is-invalid]='regForm.get("grb").errors'
+            [class.is-valid]='regForm.get("grb") && regForm.get("grb").touched'
+            (change)="handleFileInput($any($event.target).files)"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button  *ngIf="potvrdi" type="submit" >Региструј предузеће</button>
+        </td>
+    </tr>
+</table>
+</form>
+<span class='greska'>{{message}}</span>
+<br/>
+<span class='greska'>{{messageSlika}}</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('kor_ime').hasError('required')">Унесите корисничко име.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('ime').hasError('required')" >Унесите име.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('prezime').hasError('required')" >Унесите презиме.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('lozinka').hasError('required')">Унесите лозинку.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('lozinkaP').hasError('required')">Унесите потврду лозинке.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('broj').hasError('required')">Унесите број телефона.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('adresa').hasError('required')" >Унесите адресу.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('mejl').hasError('required')" >Унесите имејл адресу.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('matBroj').hasError('required')">Унесите матични број предузећа.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('pib').hasError('required')">Унесите ПИБ.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('grb').hasError('required')">Приложите грб предузећа.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('lozinka').hasError('pattern')" >Унесите лозинку у одговарајућем формату.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('broj').hasError('pattern')">Унесите број телефона у одговарајућем формату.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('pib').hasError('pattern')">Унесите ПИБ у одговарајућем формату.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('mejl').hasError('email')">Унесите валидну имејл адресу.</span>
+
+

@@ -1,0 +1,122 @@
+<div class="container">  
+    
+  <h1> Додатне информације </h1>  
+    
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">  
+      
+    <p>
+        тип предузећа:
+        <br/>
+            <mat-radio-group class="form-control" formControlName='tip'  
+            [class.is-invalid]='productForm.get("tip").errors'
+            [class.is-valid]='productForm.get("tip") && productForm.get("tip").touched'>
+                <mat-radio-button value="P" [checked]='true'>малопродајни објекат</mat-radio-button>
+                <mat-radio-button value="U">услужни објекат</mat-radio-button>
+              </mat-radio-group>
+        
+    </p>
+   
+        <table class="table table-bordered" formArrayName="delatnosti">
+            <tr>
+                <td>Изаберите делатности предузећа</td>
+            </tr>
+            <tr *ngFor="let delatnost of delatnosti().controls; let i=index" [formGroupName]="i">
+                <td>
+                    <select formControlName="delatnost" class="form-control">
+                        <option *ngFor="let delatnosti of sifarnik">{{delatnosti.naziv}}</option>
+                    </select>
+                </td>
+                <td>
+                    <button (click)="ukloniDelatnost(i)" class="btn btn-danger">Уклони</button>
+                </td>
+            </tr>
+            <tr>
+                <button type="button" (click)="dodajDelatnost()" class="btn btn-primary">+</button>
+            </tr>
+        </table>
+          
+        <br/>  
+       
+        Предузеће је у систему ПДВ-а:
+        <br />
+        <input type="checkbox" class="form-control" formControlName='uSistemu' placeholder="false" >
+        <br />   
+        
+    <table class="table table-bordered" formArrayName="ziroRacuni"> 
+      <tr><td>Унесите жиро рачун(е) предузећа</td></tr>    
+      <tr *ngFor="let racun of ziroRacuni().controls; let i=index" [formGroupName]="i">  
+        <td>   
+            <input type="text" formControlName="ziroRacun" class="form-control">  
+        </td>    
+        <td>  
+            <button (click)="ukloniRacun(i)" class="btn btn-danger">Уклони</button>  
+        </td>  
+      </tr>
+      <tr>   
+        <button type="button" (click)="dodajRacun()" class="btn btn-primary">+</button>  
+      </tr>   
+    </table>  
+    Унесите број магацина:
+
+    
+
+    <input type="number" formControlName="brojMagacina" class="form-control">  
+    <button type="button" (click)="postaviMagacine(brojMagacina())" class="btn btn-primary">Потврди</button>    
+      
+
+    <table class="table table-bordered" formArrayName="magacini"> 
+        <tr *ngFor="let magacin of magacini().controls; let i=index" [formGroupName]="i">  
+          <td>   
+              назив:<input type="text" formControlName="naziv" class="form-control">  
+          </td>
+          <td>
+              ид:<input type="number" formControlName="id" class="form-control">  
+          </td>     
+        </tr>  
+      </table>  
+     
+     
+  
+  
+  
+
+  Унесите број каса:
+
+
+  <input type="number" formControlName="brojKasa" class="form-control">  
+    <button type="button" (click)="postaviKase(brojKasa())" class="btn btn-primary">Потврди</button>    
+      
+
+    <table class="table table-bordered" formArrayName="kase"> 
+        <tr *ngFor="let kasa of kase().controls; let i=index" [formGroupName]="i">  
+          <td>   
+              локација:<input type="text" formControlName="lokacija" class="form-control">  
+          </td>
+          <td>
+              тип:<input type="number" formControlName="tip" class="form-control">  
+          </td>     
+        </tr>  
+      </table>  
+     
+    <button type="submit" class="btn btn-success">Потврди</button>  
+  </form>  
+      
+  <br/>  
+  {{this.productForm.value | json}} 
+  <br/> 
+  
+<br/>  
+<span class='greska'>{{message}}</span>
+<br/>
+{{greskaD}}
+<br/>
+{{greskaZR}}
+<br/>
+{{greskaM}}
+<br/>
+{{greskaK}}
+<br/>
+<hr>
+ <a routerLink="..">Повратак на мени</a>
+
+

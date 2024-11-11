@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Сто</h1>
+<mat-label>Назив</mat-label>
+<input matInput type="text" [(ngModel)]="sto.naziv">
+<mat-radio-group [(ngModel)]="sto.oblik">Облик
+<mat-radio-button value="O">Округли</mat-radio-button>
+<mat-radio-button value="P">Правоугаони</mat-radio-button>
+</mat-radio-group>
+<br/>
+<div *ngIf="sto.oblik=='P'">
+<mat-label>Дужина</mat-label>
+<input matInput type="text" [(ngModel)]="sto.a">
+<br/>
+<mat-label>Ширина</mat-label>
+<input matInput type="text" [(ngModel)]="sto.b">
+<br/>
+<mat-label>Полупречник</mat-label>
+</div>
+<input *ngIf="sto.oblik=='O'" matInput type="text" [(ngModel)]="sto.a">
+<hr>
+<button mat-button (click)="odustani()">Одустани</button>
+<button mat-button (click)="izaberi()">Потврди</button>
+{{message}}
+

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Артикли</h1>
+<div mat-dialog-content>
+  <table>
+    <div *ngFor="let artikal in artikli">
+    <tr >
+        <td>{{artikal.naziv_artikla}}</td>
+        <td>({{artikal.sifra_artikla}})</td>
+        <td><button mat-button (click)="izaberi(artikal)">Изабери</button></td>
+    </tr>
+</div>
+
+  </table>
+  <td><button mat-button (click)="odustani()">Одустани</button></td>
+</div>

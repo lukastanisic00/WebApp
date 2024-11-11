@@ -1,0 +1,16 @@
+<h2>Рачуни</h2>
+<hr>
+<table>
+    <tr>
+        <td>Назив предузећа</td>
+        <td>Назив објекта</td>
+        <td>Износ(РСД)</td>
+        <td>Начин плаћања</td>
+    </tr>
+    <tr *ngFor = 'let r of racuni;' (click)="detalji(r)">
+        <td>{{r.nazivPreduzeca}}</td>
+        <td>{{r.nazivObjekta}}</td>
+        <td>{{r.iznos}}</td>
+        <td>{{r.nacinPlacanja}}</td>
+    </tr>
+</table>

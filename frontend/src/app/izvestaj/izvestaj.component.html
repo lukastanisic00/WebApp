@@ -1,0 +1,28 @@
+<h2>Дневни извештај</h2>
+
+
+Укупан износ:<span class="iznos" >{{iznos}}</span>
+Од тога порез:<span class="iznos" >{{porez}}</span>
+
+<hr>
+
+
+Одаберите рачун:
+<select   [(ngModel)]="stavkeNaRacunu" onChange={this.handleChange}>
+    <option *ngFor="let racun of racuni" value="{{racun.stavke}}">{{racun.datum.getHours()}}:{{racun.datum.getMinutes()}}</option>
+</select>
+<hr>
+<table>
+    <tr>
+        <td>шифра_артикла</td>
+        <td>назив_артикла</td>
+        <td>цена</td>
+        <td>стање</td>
+    </tr>  
+    <tr *ngFor = 'let stavka of stavkeNaRacunu;'>
+        <td>{{stavka.sifra}}</td>
+        <td>{{stavka.naziv}}</td>
+        <td>{{stavka.cena}}</td> 
+        <td>{{stavka.kolicina}}</td>
+    </tr>
+</table>   

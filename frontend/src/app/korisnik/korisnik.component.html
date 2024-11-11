@@ -1,0 +1,23 @@
+<b>Proizvodi</b>
+<table>
+    <tr>
+        <td>Naziv</td>
+        <td>Kolicina</td>
+    </tr>
+    <tr *ngFor = 'let proizvod of proizvodi;'>
+        <td>{{proizvod.naziv}}</td>
+        <td>{{proizvod.kolicina}}</td>
+        <td>
+            <input type='checkbox' name='proizvodi' [(ngModel)]='proizvod.zaKupovinu'>
+        </td>
+    </tr>
+</table>
+<input type='button' value="Промени лозинку" (click)='promenaLozinke()'>
+{{poruka}}
+<hr/>
+<form>
+    
+    Komentar: <input type='text' name="komentar" [(ngModel)]='komentar'>
+    <br/>
+    <input type='button' value="Komentarisi" (click)='komentarisi()'>
+</form>

@@ -1,0 +1,93 @@
+<h3>РЕГИСТРАЦИЈА</h3>
+<form  [formGroup]='regForm' (ngSubmit)="register()">
+<table>
+    <tr>
+        <td>Име физичког лица:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='ime'  
+            [class.is-invalid]='regForm.get("ime").errors'
+            [class.is-valid]='regForm.get("ime") && regForm.get("ime").touched'>        
+        </td>
+    </tr>
+    <tr>
+        <td>Презиме физичког лица:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='prezime' 
+            [class.is-invalid]='regForm.get("prezime").errors'
+            [class.is-valid]='regForm.get("prezime") && regForm.get("prezime").touched' >
+        </td>
+    </tr>
+    <tr>
+        <td>Корисничко име:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='kor_ime'  
+            [class.is-invalid]='regForm.get("kor_ime").errors'
+            [class.is-valid]='regForm.get("kor_ime") && regForm.get("kor_ime").touched'  >
+        </td>
+    </tr>
+    <tr>
+        <td>Лозинка:</td>
+        <td>
+            <input type="password" class="form-control" formControlName='lozinka'  
+            [class.is-invalid]='regForm.get("lozinka").errors'
+            [class.is-valid]='regForm.get("lozinka") && regForm.get("lozinka").touched'   >
+        </td>
+    </tr>
+    <tr>
+        <td>Потврда лозинке:</td>
+        <td>
+            <input type="password" class="form-control" formControlName='lozinkaP'  
+            [class.is-invalid]='regForm.get("lozinkaP").errors'
+            [class.is-valid]='regForm.get("lozinkaP") && regForm.get("lozinkaP").touched'>
+        </td>
+    </tr>
+    <tr>
+        <td>Контакт телефон:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='broj'  
+            [class.is-invalid]='regForm.get("broj").errors'
+            [class.is-valid]='regForm.get("broj") && regForm.get("broj").touched' >
+        </td>
+    </tr>
+    <tr>
+        <td>Број личне карте:</td>
+        <td>
+            <input type="text" class="form-control" formControlName='brLk'  
+            [class.is-invalid]='regForm.get("brLk").errors'
+            [class.is-valid]='regForm.get("brLk") && regForm.get("brLk").touched'  >
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button   type="submit" >Региструј купца</button>
+        </td>
+    </tr>
+</table>
+</form>
+<span class='greska'>{{message}}</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('kor_ime').hasError('required')">Унесите корисничко име.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('ime').hasError('required')" >Унесите име.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('prezime').hasError('required')" >Унесите презиме.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('lozinka').hasError('required')">Унесите лозинку.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('lozinkaP').hasError('required')">Унесите потврду лозинке.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('broj').hasError('required')">Унесите број телефона.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('brLk').hasError('required')" >Унесите број личне карте.</span>
+<br/>
+
+
+
+<span class="form-control" *ngIf="regForm.get('lozinka').hasError('pattern')" >Унесите лозинку у одговарајућем формату.</span>
+<br/>
+<span class="form-control" *ngIf="regForm.get('broj').hasError('pattern')">Унесите број телефона у одговарајућем формату.</span>
+<br/>
+
+<span class="form-control" *ngIf="regForm.get('mejl').hasError('pattern')">Унесите валидни број личне карте.</span>
+
+
