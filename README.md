@@ -1,2 +1,2 @@
 # WebApp
-An app based on fiscalization system in Serbia implemented with MEAN stack.
+A MEAN stack application that serves for the fiscalization system in Serbia developed as a university project.
